@@ -1,0 +1,12 @@
+.vs
+*.vcxproj.user
+*.vcxproj.filters
+
+Debug
+Release
+packages
+
+
+*.iml
+.idea
+target
