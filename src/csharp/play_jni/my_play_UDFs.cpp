@@ -3,7 +3,7 @@
 #include "JNIUtil.h"
 
 using namespace MyTest;
-using namespace Microsoft::SatoriStreamingV2;
+using namespace Common;
 using namespace System::Runtime::InteropServices;
 using namespace System;
 

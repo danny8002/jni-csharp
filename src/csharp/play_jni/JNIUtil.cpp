@@ -9,13 +9,13 @@ using namespace System::Runtime::InteropServices;
 // for string convertion
 // see https://docs.microsoft.com/en-us/cpp/dotnet/overview-of-marshaling-in-cpp?view=vs-2019
 
-System::String ^ Microsoft::SatoriStreamingV2::JNIUtil::ToCLRString(const char * value)
+System::String ^ Common::JNIUtil::ToCLRString(const char * value)
 {
 	marshal_context ctx;
 	return ctx.marshal_as<System::String^>(value);
 }
 
-System::String ^ Microsoft::SatoriStreamingV2::JNIUtil::ToCLRString(JNIEnv * env, jstring value)
+System::String ^ Common::JNIUtil::ToCLRString(JNIEnv * env, jstring value)
 {
 	const char *nativeString = env->GetStringUTFChars(value, 0);
 
@@ -23,7 +23,7 @@ System::String ^ Microsoft::SatoriStreamingV2::JNIUtil::ToCLRString(JNIEnv * env
 	return ctx.marshal_as<System::String^>(nativeString);
 }
 
-array<System::Byte>^ Microsoft::SatoriStreamingV2::JNIUtil::ToCLRByteArray(JNIEnv * env, jbyteArray value)
+array<System::Byte>^ Common::JNIUtil::ToCLRByteArray(JNIEnv * env, jbyteArray value)
 {
 	size_t length = env->GetArrayLength(value);
 	array<System::Byte>^ target = gcnew array<unsigned char>(length);
@@ -35,7 +35,7 @@ array<System::Byte>^ Microsoft::SatoriStreamingV2::JNIUtil::ToCLRByteArray(JNIEn
 	return target;
 }
 
-jstring Microsoft::SatoriStreamingV2::JNIUtil::ToJNIString(JNIEnv * env, System::String ^ value)
+jstring Common::JNIUtil::ToJNIString(JNIEnv * env, System::String ^ value)
 {
 	marshal_context ctx;
 	const char* buf = ctx.marshal_as<const char*>(value);
@@ -43,7 +43,7 @@ jstring Microsoft::SatoriStreamingV2::JNIUtil::ToJNIString(JNIEnv * env, System:
 	return env->NewStringUTF(buf);
 }
 
-jbyteArray Microsoft::SatoriStreamingV2::JNIUtil::ToJNIByteArray(JNIEnv * env, array<System::Byte>^ value)
+jbyteArray Common::JNIUtil::ToJNIByteArray(JNIEnv * env, array<System::Byte>^ value)
 {
 	// https://docs.microsoft.com/en-us/cpp/dotnet/how-to-marshal-arrays-using-cpp-interop?view=vs-2019
 
@@ -57,7 +57,7 @@ jbyteArray Microsoft::SatoriStreamingV2::JNIUtil::ToJNIByteArray(JNIEnv * env, a
 	return array;
 }
 
-jint Microsoft::SatoriStreamingV2::JNIUtil::ThrowJNIException(JNIEnv *env, System::String^ value)
+jint Common::JNIUtil::ThrowJNIException(JNIEnv *env, System::String^ value)
 {
 	marshal_context ctx;
 	const char* message = ctx.marshal_as<const char*>(value);

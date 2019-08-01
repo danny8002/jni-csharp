@@ -2,26 +2,23 @@
 #pragma once
 #include "jni.h"
 
-namespace Microsoft
+namespace Common
 {
-	namespace SatoriStreamingV2 {
+	public ref class JNIUtil {
 
-		public ref class JNIUtil {
+	public:
 
-		public:
+		static System::String^ ToCLRString(const char* value);
+		static System::String^ ToCLRString(JNIEnv *env, jstring value);
 
-			static System::String^ ToCLRString(const char* value);
-			static System::String^ ToCLRString(JNIEnv *env, jstring value);
+		static array<System::Byte>^ ToCLRByteArray(JNIEnv *env, jbyteArray value);
 
-			static array<System::Byte>^ ToCLRByteArray(JNIEnv *env, jbyteArray value);
+		static jstring    ToJNIString(JNIEnv *env, System::String^ value);
+		static jbyteArray ToJNIByteArray(JNIEnv *env, array<System::Byte>^ value);
 
-			static jstring    ToJNIString(JNIEnv *env, System::String^ value);
-			static jbyteArray ToJNIByteArray(JNIEnv *env, array<System::Byte>^ value);
-
-			static jint ThrowJNIException(JNIEnv *env, System::String^ value);
+		static jint ThrowJNIException(JNIEnv *env, System::String^ value);
 
 
-		};
-	}
+	};
 
 }
